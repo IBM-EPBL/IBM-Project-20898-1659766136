@@ -1,0 +1,60 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Ticket Details </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#dash">Welcome To Dashboard!   </a>
+  <a class="middle">Ticket Solver - PNT2022TMID27274 </a>
+  <a class="leftnav" href="/logout">Logout</a>
+</div>
+
+<div style="padding-left:55px">
+  <h2>Tickets Details</h2>
+</div>
+
+<div style="padding-left:55px">
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+  </div>
+
+  <div class="ticketdetailsouter" id="customers">
+    {% for row in details %}
+    <h3>Details of Ticket Id - {{row['TICKETID']}} </h3>
+    <div class="ticketdetailsinner">
+       <br>  
+      <p><strong>Ticket Name - </strong>{{row['TICKETNAME']}}</p>
+          <br>
+          <p><strong>Product Type - </strong>{{row['PRODUCTTYPE']}}</p>
+          <br>
+          <p><strong>Priority - </strong>{{row['PRIORITY']}}</p>
+          <br>
+          <p><strong>Description - </strong>{{row['DESCRIPTION']}}</p>
+          <br>
+          <p><strong>Date - </strong>{{row['DATE']}}</p>
+          <br>
+          <p><strong>Place - </strong>{{row['PLACE']}}</p>
+          <br>
+          <p><strong>Status - </strong>{{row['STATUS']}}</p>
+          <br>
+          <p><strong>Customer Name - </strong>{{row['CUSTOMERNAME']}}</p>
+          <br>
+          <p><strong>Agent Name - </strong>{{row['AGENTNAME']}}</p>
+          <br>
+          <p><strong>Resolution - </strong>{{row['RESOLUTION']}}</p>
+         
+      </div>
+      {% endfor %}
+      <br>
+      <hr>
+      <br>
+  </div>
+      
+    </body>
+</html>
