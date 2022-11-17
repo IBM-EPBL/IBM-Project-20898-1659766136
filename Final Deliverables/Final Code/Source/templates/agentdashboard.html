@@ -1,0 +1,67 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Dashboard </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#dash">Welcome To Dashboard!   </a>
+  <a class="middle">Ticket Solver - PNT2022TMID27274</a>
+  <a class="leftnav" href="/logout">Logout</a>
+</div>
+
+<div style="padding-left:55px">
+  <h2>Welcome To Dashboard!</h2>
+  <br>
+  <h3>Tickets Assigned To You..</h3>
+    <hr>
+    <br>
+    <br>
+</div>
+
+
+  <div class="tabledetails" id="customers" align="center">
+    {% if agentaccount %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Customer</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+            {% for rows in agentaccount %} 
+                <tr>
+                  <td>{{rows['TICKETID']}}</td>
+                  <td>{{rows['TICKETNAME']}}</td>
+                  <td>{{rows['PRIORITY']}}</td>
+                  <td>{{rows['DATE']}}</td>
+                  <td>{{rows['STATUS']}}</td>
+                  <td>{{rows['CUSTOMERNAME']}}</td>
+                    <td>
+                      <form action="{{ url_for('detail') }}" method="post">
+                        <input type="submit" value="View">
+                        <input type="hidden" id="view" name="view" value="{{rows['TICKETID']}}">
+                      </form>
+                    </td>
+                    <td>
+                      <form action="{{ url_for('resolution') }}" method="post">
+                        <input type="hidden" id="addre" name="addre" value="{{rows['TICKETID']}}">
+                        <input type="submit" value="Add Resolution">
+                      </form>
+                    </td>
+                </tr>
+            {% endfor %} 
+            {% else %}
+            <h2>No Tickets Assigned To You Yet</h2>
+            {% endif %}   
+    </table>
+  </div>
+      
+    </body>
+</html>
