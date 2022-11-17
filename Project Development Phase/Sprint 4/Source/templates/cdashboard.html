@@ -1,0 +1,70 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Dashboard </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#dash">Welcome To Dashboard!   </a>
+  <a class="middle">Ticket Solver - PNT2022TMID27274</a>
+  <a class="leftnav" href="/logout">Logout</a>
+</div>
+
+<div style="padding-left:55px">
+  <h2>Tickets</h2>
+</div>
+
+<div style="padding-left:55px">
+    <a href="/ticketform" ><button>Create a New Ticket</button></a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+  </div>
+
+  <div class="tabledetails" id="customers" align="center">
+    {% if customeraccount %}
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+            <th>Status</th>
+            <th>Agent</th>
+            <th> </th>
+            <th> </th>
+        </tr>
+            {% for rows in customeraccount %} 
+                <tr>
+                  <td>{{rows['TICKETID']}}</td>
+                  <td>{{rows['TICKETNAME']}}</td>
+                  <td>{{rows['PRIORITY']}}</td>
+                  <td>{{rows['DATE']}}</td>
+                  <td>{{rows['STATUS']}}</td>
+                  <td>{{rows['AGENTNAME']}}</td>
+                    <td>
+                      <form action="{{ url_for('detail') }}" method="post">
+                      <input type="submit" value="View">
+                      <input type="hidden" id="view" name="view" value="{{rows['TICKETID']}}">
+                    </form>
+                    </td>
+                    <td>
+                      <form action="{{ url_for('deleteticket') }}" method="post">
+                        <input type="submit" value="Delete">
+                        <input type="hidden" id="delete" name="delete" value="{{rows['TICKETID']}}">
+                      </form>
+                    </td>
+                </tr>
+            {% endfor %} 
+            {% else %}
+            <h2>You Haven't Created Any Tickets Yet</h2>
+            {% endif %}    
+    </table>
+  </div>
+      
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Customer's Account </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#dash">Welcome To Dashboard!   </a>
+  <a class="middle">Ticket Solver - PNT2022TMID27274</a>
+  <a class="leftnav" href="/logout">Logout</a>
+</div>
+
+<div style="padding-left:55px">
+  <h2>Tickets</h2>
+</div>
+
+<div style="padding-left:55px">
+    <a href="{{ url_for('admindashboard')}}" ><button>Back</button></a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+  </div>
+
+  <div class="tabledetails" id="customers" align="center">
+   {% if customers %}
+   <h2>Customers Account</h2>
+   <br>
+   <table>
+       <tr>
+           <th>ID</th>
+           <th>UserName</th>
+           <th>Email ID</th>
+           <th>Password</th>
+       </tr>
+           {% for rows in customers %} 
+               <tr>
+                   <td>{{rows['CUSTOMERID']}}</td>
+                   <td>{{rows['USERNAME']}}</td>
+                   <td>{{rows['EMAILID']}}</td>
+                   <td>{{rows['PASSWORD']}}</td>
+               </tr>
+           {% endfor %}  
+           {% else %}
+           <h2>No Customer Accounts Yet</h2>
+           {% endif %}  
+   </table>
+  </div>
+      
+    </body>
+</html>

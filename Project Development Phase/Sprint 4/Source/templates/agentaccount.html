@@ -1,0 +1,61 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Agents Account </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='dash.css') }}">
+</head>
+<body>
+
+<div class="topnav">
+  <a class="active" href="#dash">Welcome To Dashboard!   </a>
+  <a class="middle">Ticket Solver - PNT2022TMID27274</a>
+  <a class="leftnav" href="/logout">Logout</a>
+</div>
+
+<div style="padding-left:55px">
+  <h2>Tickets</h2>
+</div>
+
+<div style="padding-left:55px">
+    <a href="{{ url_for('admindashboard')}}" ><button>Back</button></a>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+  </div>
+
+  <div class="tabledetails" id="customers" align="center">
+   {% if agents %}
+   <h2>Agent Account</h2>
+   <br>
+   <table>
+       <tr>
+           <th>ID</th>
+           <th>UserName</th>
+           <th>Email ID</th>
+           <th>Password</th>
+           <th></th>
+       </tr>
+           {% for rows in agents %} 
+               <tr>
+                   <td>{{rows['AGENTID']}}</td>
+                   <td>{{rows['USERNAME']}}</td>
+                   <td>{{rows['EMAILID']}}</td>
+                   <td>{{rows['PASSWORD']}}</td>
+               <td>
+                <form action="{{ url_for('deleteagent') }}" method="post">
+                  <input type="submit" value="Remove Agent">
+                  <input type="hidden" id="remove" name="remove" value="{{rows['AGENTID']}}">
+                </form>
+              </td>
+            </tr>
+           {% endfor %}  
+           {% else %}
+           <h2>No Agents Accounts Yet</h2>
+           {% endif %}  
+   </table>
+  </div>
+      
+    </body>
+</html>
